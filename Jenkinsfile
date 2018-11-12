@@ -2,22 +2,21 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') 
-		{
+        stage('Build') {
             steps {
                 echo 'Running build automation'
+		sh './gradlew build --no-daemon'
             }
         }
-		        stage('Archive Artifact') 
-		{
+	stage('Archive Artifact') {
             steps {
                 echo 'Archive Artifact'
+		archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
         stage('Build Docker Image') {
-
-            steps {
-				echo 'Docker Image'
+		steps {
+		    echo 'Docker Image'
             }
         }
         stage('Push Docker Image') {
@@ -25,20 +24,18 @@ pipeline {
                 branch 'master'
             }
             steps {
-				echo 'Docker Push'
+		echo 'Docker Push'
             }
         }
         stage('CanaryDeploy') {
-
             steps {
-				echo 'Canary Deploy'
+		echo 'Canary Deploy'
             }
         }
         stage('DeployToProduction') {
-
-		steps {
+	    steps {
                 input 'Deploy to Production?'
-				echo 'Production Deploy'
+		echo 'Production Deploy'
 
             }
         }
