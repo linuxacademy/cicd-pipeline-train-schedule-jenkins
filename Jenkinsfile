@@ -15,8 +15,16 @@ pipeline {
             }
         }
         stage('Build Docker Image') {
-		steps {
-		    echo 'Docker Image'
+            when {
+                branch 'master'
+            }
+            steps {
+                script {
+                    app = docker.build("pradeepe/train-schedule")
+                    app.inside {
+                        sh 'echo $(curl localhost:8080)'
+                    }
+                }
             }
         }
         stage('Push Docker Image') {
@@ -24,7 +32,12 @@ pipeline {
                 branch 'master'
             }
             steps {
-		echo 'Docker Push'
+                script {
+                    docker.withRegistry('https://registry.hub.docker.com', 'DockerHub_login') {
+                        app.push("${env.BUILD_NUMBER}")
+                        app.push("latest")
+                    }
+                }
             }
         }
 	stage('DeployToStaging') {
