@@ -72,11 +72,6 @@ pipeline {
             }
         }
 	    
-        stage('CanaryDeploy') {
-            steps {
-		echo 'Canary Deploy'
-            }
-        }
         stage('DeployToProduction') {
 	    steps {
                 input 'Deploy to Production?'
