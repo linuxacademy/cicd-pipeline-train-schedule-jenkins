@@ -51,17 +51,8 @@ pipeline {
 	      }
 	    }
 	  }
-	post {
-	  failure {
-	    emailext(
-		subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] Failed!",
-		body: """<p>'${env.JOB_NAME} [${env.BUILD_NUMBER}]' Failed!":</p>
-		<p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
-		to: "pradeep.edirisinghe@accenture.com"
-	    )
-	  }
-	}       
-        stage('Build Docker Image') {
+	
+	stage('Build Docker Image') {
             when {
                 branch 'master'
             }
@@ -74,7 +65,7 @@ pipeline {
                 }
             }
         }
-        stage('Push Docker Image') {
+	        stage('Push Docker Image') {
             when {
                 branch 'master'
             }
@@ -118,7 +109,7 @@ pipeline {
                 }
             }
         }
-	    
+	
 	stage('DeployToProduction') {
 	    when {
                 branch 'master'
@@ -150,6 +141,16 @@ pipeline {
                     )
                 }
             }
-        }   
+	} 	
+	post {
+	  failure {
+	    emailext(
+		subject: "${env.JOB_NAME} [${env.BUILD_NUMBER}] Failed!",
+		body: """<p>'${env.JOB_NAME} [${env.BUILD_NUMBER}]' Failed!":</p>
+		<p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
+		to: "pradeep.edirisinghe@accenture.com"
+	    )
+	  }
+	}       
     }
 }
