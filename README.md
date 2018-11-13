@@ -4,7 +4,7 @@ This is a simple train schedule app written using nodejs. It is intended to be u
 
 ## Running the app
 
-You need a Java JDK 7 or later to run the build. You can run the build like this:
+You need a Java JDK 8 or later to run the build. You can run the build like this:
 
     ./gradlew build
 
