@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Running build automation'
-                sh 'sudo pytest'
+                sh 'sudo pytest test1.py'
         
             }
         }
