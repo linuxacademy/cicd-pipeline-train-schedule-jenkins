@@ -5,7 +5,7 @@ pipeline {
             steps {
                 echo 'Running build automation'
                 sh 'pwd'
-                sh 'pytest test1.py'
+                sh 'pytest test1.py  --junitxml=report.xml'
         
             }
         }
