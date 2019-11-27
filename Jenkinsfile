@@ -3,10 +3,14 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                input message: 'User input required', ok: 'Release!',
-                parameters: [choice(name: 'RELEASE_SCOPE', choices: 'patch\nminor\nmajor', description: 'What is the release scope?')]
-                echo "env: ${env.RELEASE_SCOPE}"
-                echo "params: ${params.RELEASE_SCOPE}"
+                script {
+                            def userInput = input(id: 'userInput', message: 'Merge to?',
+                            parameters: [[$class: 'ChoiceParameterDefinition', defaultValue: 'strDef', 
+                            description:'describing choices', name:'nameChoice', choices: "QA\nUAT\nProduction\nDevelop\nMaster"]
+                            ])
+
+                            println(userInput); //Use this value to branch to different logic if needed
+                }
                 echo 'Running build automation'
                 sh 'pwd'
                 sh 'pytest test1.py  --junitxml=report.xml'
