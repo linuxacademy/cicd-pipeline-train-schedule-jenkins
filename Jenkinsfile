@@ -30,11 +30,6 @@ pipeline {
                     echo("IQA Sheet Path: ${inputConfig}")
                     echo("Test Info file path: ${inputTest}")
 
-                    // Write to file
-                    writeFile file: "inputData.txt", text: "Config=${inputConfig}\r\nTest=${inputTest}"
-
-                    // Archive the file (or whatever you want to do with it)
-                    archiveArtifacts 'inputData.txt'
                 }
         }
     }
