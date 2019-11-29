@@ -32,6 +32,8 @@ pipeline {
                     // Echo to console
                     echo("IQA Sheet Path: ${inputConfig}")
                     echo("Test Info file path: ${inputTest}")
+                    
+                    sh 'pytest test1.py  --junitxml=report.xml'
 
                     // Write to file
                     writeFile file: "inputData.txt", text: "Config=${inputConfig}\r\nTest=${inputTest}"
@@ -42,4 +44,10 @@ pipeline {
             }
         }
     }
+    
+        post {
+          always {
+            junit '*.xml'
+      }
+   }
 }
