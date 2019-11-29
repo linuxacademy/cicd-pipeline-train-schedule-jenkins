@@ -8,6 +8,7 @@ pipeline {
             steps {
                 script {
 
+                    
                     // Variables for input
                     def inputConfig
                     def inputTest
