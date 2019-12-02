@@ -18,7 +18,7 @@ pipeline {
                             id: 'userInput', message: 'Enter the repository for smoke test:?',
                             parameters: [
 
-                                    string(defaultValue: 'git@github.com:AviatrixDev/regression.git',
+                                    string(defaultValue: 'git@github.com:repo1/regression.git',
                                             description: 'Clone with ssh link',
                                             name: 'Config'),
                             ])
