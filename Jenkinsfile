@@ -15,32 +15,29 @@ pipeline {
 
                     // Get the input
                     def userInput = input(
-                            id: 'userInput', message: 'Enter path of test reports:?',
+                            id: 'userInput', message: 'Enter the repository for smoke test:?',
                             parameters: [
 
-                                    string(defaultValue: 'None',
-                                            description: 'Path of config file',
+                                    string(defaultValue: 'git@github.com:AviatrixDev/regression.git',
+                                            description: 'Clone with ssh link',
                                             name: 'Config'),
-                                    string(defaultValue: 'None',
-                                            description: 'Test Info file',
-                                            name: 'Test'),
                             ])
 
                     // Save to variables. Default to empty string if not found.
                     inputConfig = userInput.Config?:''
-                    inputTest = userInput.Test?:''
+                    //inputTest = userInput.Test?:''
 
                     // Echo to console
                     echo("IQA Sheet Path: ${inputConfig}")
-                    echo("Test Info file path: ${inputTest}")
+                    //echo("Test Info file path: ${inputTest}")
                     
                     sh 'pytest test1.py  --junitxml=report.xml'
 
                     // Write to file
-                    writeFile file: "inputData.txt", text: "Config=${inputConfig}\r\nTest=${inputTest}"
+                    //writeFile file: "inputData.txt", text: "Config=${inputConfig}\r\nTest=${inputTest}"
 
                     // Archive the file (or whatever you want to do with it)
-                    archiveArtifacts 'inputData.txt'
+                    //archiveArtifacts 'inputData.txt'
                 }
             }
         }
