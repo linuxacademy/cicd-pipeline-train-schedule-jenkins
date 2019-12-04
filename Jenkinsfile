@@ -6,6 +6,7 @@ pipeline {
                 echo 'Running build automation'
                 sh 'pwd'
                 sh 'pytest test1.py  --junitxml=report.xml'
+                sh 'sleep 420'
         
             }
         }
