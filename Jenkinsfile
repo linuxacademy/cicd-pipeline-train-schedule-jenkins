@@ -15,7 +15,8 @@ pipeline {
     
     post {
       always {
-        junit '/var/jenkins_home/*/*.xml'
+        echo "post run"  
+        //junit '/var/jenkins_home/*/*.xml'
       }
    } 
 }
