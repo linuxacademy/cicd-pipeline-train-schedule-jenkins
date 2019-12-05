@@ -16,6 +16,7 @@ pipeline {
     
     post {
       always {
+        sh 'rm -rf cicd-pipeline-train-schedule-git'  
         echo "post run"  
         //junit '/var/jenkins_home/*/*.xml'
       }
