@@ -7,7 +7,8 @@ pipeline {
                 sh 'git clone https://github.com/mailv1/cicd-pipeline-train-schedule-git.git'
                 echo 'Running build automation'
                 sh 'pwd'
-                sh 'pytest test1.py  --junitxml=report.xml'
+                sh 'sleep 420'
+               //sh 'pytest test1.py  --junitxml=report.xml'
         
             }
         }
