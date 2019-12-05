@@ -18,11 +18,15 @@ pipeline {
                             parameters: [
 
                                     string(defaultValue: 'None',
-                                            description: 'Path of config file',
-                                            name: 'Config'),
+                                            description: 'Clone repo link',
+                                            name: 'Clone Repo'),
                                     string(defaultValue: 'None',
-                                            description: 'Test Info file',
-                                            name: 'Test'),
+                                            description: 'Username',
+                                            name: 'Enter User Name'),
+                                    string(defaultValue: 'None',
+                                            description: 'Description of Test Log',
+                                            name: 'Description'),
+                                    
                             ])
 
                     // Save to variables. Default to empty string if not found.
