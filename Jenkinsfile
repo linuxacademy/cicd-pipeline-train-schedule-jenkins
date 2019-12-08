@@ -20,6 +20,8 @@ pipeline {
         echo "post run"  
         //junit '/var/jenkins_home/*/*.xml'
         //new comment  
+          
+          
       }
    } 
 }
