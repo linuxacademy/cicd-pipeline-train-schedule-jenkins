@@ -21,4 +21,5 @@ pipeline {
         //junit '/var/jenkins_home/*/*.xml'
       }
    } 
+    
 }
