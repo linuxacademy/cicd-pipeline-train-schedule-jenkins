@@ -11,6 +11,10 @@ pipeline {
                //sh 'pytest test1.py  --junitxml=report.xml'
                 //echo "${params.base} <<<<<<<<World!"
                 echo "$WORKSPACE"
+                echo "JOB_NAME"
+                echo "BUILD_NUMBER"
+                
+                
         
             }
         }
