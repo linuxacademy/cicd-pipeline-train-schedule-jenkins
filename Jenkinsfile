@@ -9,7 +9,7 @@ pipeline {
                 sh 'pwd'
                 //sh 'sleep 420'
                //sh 'pytest test1.py  --junitxml=report.xml'
-               echo pullRequest.id 
+               echo pullRequest
         
             }
         }
