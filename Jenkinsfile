@@ -9,7 +9,9 @@ pipeline {
                 sh 'pwd'
                 //sh 'sleep 420'
                //sh 'pytest test1.py  --junitxml=report.xml'
-               pullRequest.addLabel('Build Failed')
+                script { 
+                        pullRequest.addLabel('Build Failed')
+                }
         
             }
         }
