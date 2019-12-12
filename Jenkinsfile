@@ -7,13 +7,11 @@ pipeline {
                 //sh 'git clone https://github.com/mailv1/cicd-pipeline-train-schedule-git.git'
                 echo 'Running build automation'
                 sh 'pwd'
-                //sh 'sleep 420'
-               //sh 'pytest test1.py  --junitxml=report.xml'
                 //echo "${params.base} <<<<<<<<World!"
-                echo "$WORKSPACE"
-                echo "$JOB_NAME"
-                echo "$BUILD_NUMBER" 
-                
+                echo "WORKSPACE--> $WORKSPACE"
+                echo "JOB_NAME--> $JOB_NAME"
+                echo "BUID_NUMBER--> $BUILD_NUMBER"
+                echo "BRANCH_NAME--> $BRANCH_NAME"
             }
         }
     }
