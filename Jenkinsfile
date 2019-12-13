@@ -17,23 +17,12 @@ pipeline {
 		echo "GIT_COMMITTER_EMAIL --> $GIT_COMMITTER_EMAIL"
 		echo "GIT_LOCAL_BRANCH --> $GIT_LOCAL_BRANCH"
 		echo "GIT_BRANCH --> $GIT_BRANCH"*/
-		sh "printenv | sort"    
+		//sh "printenv | sort"    
 	    }
-		
-			    
-			    
-		    
-	     /*   script {
-                   def fields = env.getEnvironment()
-                   fields.each {
-			key, value -> println("${key} = ${value}");
-                    }
-
-                    println(env.PATH)
-            }*/
+	
 	}
     }
-  }
+  
     post {
       always {
 	//sh 'rm -rf cicd-pipeline-train-schedule-git'
