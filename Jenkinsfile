@@ -17,8 +17,9 @@ pipeline {
 		echo "GIT_COMMITTER_EMAIL --> $GIT_COMMITTER_EMAIL"
 		echo "GIT_LOCAL_BRANCH --> $GIT_LOCAL_BRANCH"
 		echo "GIT_BRANCH --> $GIT_BRANCH"*/
+		sh "printenv | sort"    
 	    }
-		sh "printenv | sort"
+		
 			    
 			    
 		    
