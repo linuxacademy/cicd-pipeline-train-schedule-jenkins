@@ -12,11 +12,19 @@ pipeline {
                 echo "JOB_NAME--> $JOB_NAME"
                 echo "BUID_NUMBER--> $BUILD_NUMBER"
                 echo "BRANCH_NAME--> $BRANCH_NAME"
-                echo " GIT_AUTHOR_EMAIL--> $GIT_AUTHOR_EMAIL"
+                /*echo " GIT_AUTHOR_EMAIL--> $GIT_AUTHOR_EMAIL"
                 echo "GIT_AUTHOR_NAME --> $GIT_AUTHOR_NAME"
                 echo "GIT_COMMITTER_EMAIL --> $GIT_COMMITTER_EMAIL"
                 echo "GIT_LOCAL_BRANCH --> $GIT_LOCAL_BRANCH"
-                echo "GIT_BRANCH --> $GIT_BRANCH"
+                echo "GIT_BRANCH --> $GIT_BRANCH"*/
+                
+                script {
+                   def fields = env.getEnvironment()
+                   fields.each {
+                        key, value -> println("${key} = ${value}");
+                    }
+ 
+                    println(env.PATH)
             }
         }
     }
