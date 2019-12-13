@@ -28,7 +28,7 @@ pipeline {
             }
         }
     }
-    
+    }
     post {
       always {
         //sh 'rm -rf cicd-pipeline-train-schedule-git'  
@@ -37,5 +37,4 @@ pipeline {
         //new comment  
       }
    } 
-}
 }
