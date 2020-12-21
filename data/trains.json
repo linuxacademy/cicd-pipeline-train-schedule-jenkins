@@ -8,6 +8,7 @@
 					"status": "ON-TIME",
 					"arrival": "12:00pm",
 					"departure": "12:10pm"
+					"mani": "120:30"
 				},
 				{
 					"station": "Pine",
