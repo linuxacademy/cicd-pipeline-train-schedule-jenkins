@@ -9,27 +9,37 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- task: Gradle@2
-  inputs:
-    workingDirectory: ''
-    gradleWrapperFile: 'gradlew'
-    gradleOptions: '-Xmx3072m'
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.8'
-    jdkArchitectureOption: 'x64'
-    publishJUnitResults: true
-    testResultsFiles: '**/TEST-*.xml'
-    tasks: 'build'
+stages:
+- stage: Build
+  jobs:
+  - job: Build
+    steps:
+    - task: Gradle@2
+      inputs:
+        workingDirectory: ''
+        gradleWrapperFile: 'gradlew'
+        gradleOptions: '-Xmx3072m'
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.8'
+        jdkArchitectureOption: 'x64'
+        publishJUnitResults: true
+        testResultsFiles: '**/TEST-*.xml'
+        tasks: 'build'
 
-
-- task: CmdLine@2
-  inputs:
-    script: |
-      ls -alh dist/
+    - task: CmdLine@2
+      inputs:
+        script: ls -alh dist/
   
-- task: PublishPipelineArtifact@1
-  inputs:
-    targetPath: '$(Build.SourcesDirectory)/dist/trainSchedule.zip'
-    artifact: 'trainSchedule.zip'
-    publishLocation: 'pipeline'
+    - task: PublishPipelineArtifact@1
+      inputs:
+        targetPath: '$(Build.SourcesDirectory)/dist/trainSchedule.zip'
+        artifact: 'trainSchedule.zip'
+        publishLocation: 'pipeline'
+  
+- stage: Test
+  jobs:
+  - job: Testing
+    steps:
+    - task: CmdLine@2
+      inputs:
+        script: 'echo testing'
