@@ -51,7 +51,7 @@ stages:
     - task: InstallSSHKey@0
       inputs:
         knownHostsEntry: 'davidespinel1c.mylabserver.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNAO1aU0nNTp3NReO8p7HhYGRhx1ME+cbjL0xXem4jXibdy4QEWE+PbB667rYzAFcMYpENQ0aTMNChr+LxhyPTpGZRQi8Bo1ACXji7x/tFwiMz7qXMOGFATD1W/uh6S/EZSd7mazTi3nGnJ1FQ11sbfTFdjZd/ka0b+AND73KSpq/NkSddvZ6u97O7Uc1/eOzlqxbHtBz8qg4DuFW/v4FS+T/hFsywjj7epS0qk2OjzYV44i41YhTSRJix04QC+fRUPZ8h9FuAj+ScFYkBvSQmN0x7Mcw60qyyBJCRImDg8he67kP8YqYmDbzC/u1Hc9lL/5ArplfKuiQD0/EqxiLj'
-        sshPublicKey: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDQxuhr0pr4QOqnVJzSFCxcLir8aFHgKmaapziqr23xtOREUX6ADXFloPfFMixEktIPvIFmfOHq0QXcXqPjG7YA4tg++PhM7fbwWJXF5ouxASk4ZMRa69aqg+HdI3T/ZtwzGu5RevjGK676dQZaS6TCZdnuRG31SOZ30mZBOiNzxGgGOt6jkpbd6LzLqA19QEbskIsOj29+A22Cs83YoB/beuWxDTprao3dNf9b97W14GlQbJ1nZRBbZcPPrSvgI8C+WhDoKVpK/m3sHarN86zsFHI7t7U0z3s24TPUyNRNtxAqdBEf8DwwpoF71usttjE8k+7NNxgTWuIWT0fsRy/AVm/X3hg3dBL1sHTzI92qdANo582CvK0JhJlhp6MMTA6WVStk8Vf9bEI9b6igeS5RThCb1kvS7pb56sYAVR6pMABHsFcxkRvbF3O7uHdoADgNoUnUAekdsm35iwOetYsQ3aWKmTENj15YTGFBbXFeuEoudi+xC7OiJBooFn/n3MM3sjUYI07Mja1msEYgRN9Z/EstmmrhgGqFfEohMqAdQesRejmoZu5qs5kUSGluH1fF0Fc0oidN0Qm1291oN3t5H0a9Sld3k8dl1uMZp4eA87ixHaad0R7ByQyO7Br598AOjzq5otVg2E1BM17qTmFszVDA7aQqZBh4W0CocUoHEw== root@davidespinel1c.mylabserver.com'
+        sshPublicKey: '$(id_rsa.pub)'
         sshPassphrase: 'teolia'
         sshKeySecureFile: 'id_rsa'
 
