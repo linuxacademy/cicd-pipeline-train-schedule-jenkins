@@ -43,7 +43,3 @@ stages:
     - task: CmdLine@2
       inputs:
         script: 'echo testing'
-
-    - task: ManualIntervention@8
-      inputs:
-        instructions: 'Does the Staging look OK?'
