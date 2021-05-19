@@ -57,10 +57,12 @@ stages:
         notifyUsers: 
         instructions: 'Please validate the build configuration and resume'
         onTimeout: 'resume'
-    - task: CmdLine@2
+
+    - task: InstallSSHKey@0
       inputs:
-        script: 'echo deploying to stage'
-      
+        knownHostsEntry: 'davidespinel1c.mylabserver.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNAO1aU0nNTp3NReO8p7HhYGRhx1ME+cbjL0xXem4jXibdy4QEWE+PbB667rYzAFcMYpENQ0aTMNChr+LxhyPTpGZRQi8Bo1ACXji7x/tFwiMz7qXMOGFATD1W/uh6S/EZSd7mazTi3nGnJ1FQ11sbfTFdjZd/ka0b+AND73KSpq/NkSddvZ6u97O7Uc1/eOzlqxbHtBz8qg4DuFW/v4FS+T/hFsywjj7epS0qk2OjzYV44i41YhTSRJix04QC+fRUPZ8h9FuAj+ScFYkBvSQmN0x7Mcw60qyyBJCRImDg8he67kP8YqYmDbzC/u1Hc9lL/5ArplfKuiQD0/EqxiLj'
+        sshPassphrase: 'teolia'
+        sshKeySecureFile: 'id_rsa'
 
 - stage: Production
   jobs:
