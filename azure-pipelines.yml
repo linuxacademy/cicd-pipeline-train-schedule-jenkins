@@ -47,9 +47,11 @@ stages:
     - task: Bash@3
       inputs:
           targetType: 'inline'
-          script: 'echo $env:SSH_CONNECTION'
+          script: |
+            echo "$env:SSH_CONNECTION"
       env:
         SSH_CONNECTION: $(id_rsa.pub)
+        
 - stage: Staging
   jobs:
   - job: InstallingSSHKey
