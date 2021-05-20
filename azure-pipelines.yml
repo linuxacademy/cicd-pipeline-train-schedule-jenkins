@@ -54,6 +54,8 @@ stages:
         sshPublicKey: '$(id_rsa.pub)'
         sshPassphrase: 'teolia'
         sshKeySecureFile: 'id_rsa'
+      env:
+       GLOBAL_SSH_CONNECTION:  $(id_rsa.pub)
 
 - stage: Production
   jobs:
