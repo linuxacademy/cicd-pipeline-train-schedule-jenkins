@@ -70,6 +70,7 @@ pipeline {
             }
             sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChacking=no $USERNAME@prod_ip \"docker run --restart-always --name train-schedule -p 3000:3000 -d dafespinelsa/train-schedule:${env:BUILD_NUMBER}\""
           }
+        }
       }
     }
   }
