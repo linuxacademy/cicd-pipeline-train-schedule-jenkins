@@ -4,7 +4,8 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 variables:
-  SSH_CONNECTION: $(id_rsa.pub)
+- group: 'ssh-connections'
+ 
 
 trigger:
 - master
@@ -45,8 +46,9 @@ stages:
     steps:
     - task: CmdLine@2
       inputs:
-        script: 'echo $(id_rsa.pub)'
-
+        script: 'echo $env:SSH_CONNECTION'
+      env:
+        SSH_CONNECTION: $(id_rsa.pub)
 
 - stage: Staging
   jobs:
@@ -55,7 +57,7 @@ stages:
     - task: InstallSSHKey@0
       inputs:
         knownHostsEntry: 'davidespinel1c.mylabserver.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNAO1aU0nNTp3NReO8p7HhYGRhx1ME+cbjL0xXem4jXibdy4QEWE+PbB667rYzAFcMYpENQ0aTMNChr+LxhyPTpGZRQi8Bo1ACXji7x/tFwiMz7qXMOGFATD1W/uh6S/EZSd7mazTi3nGnJ1FQ11sbfTFdjZd/ka0b+AND73KSpq/NkSddvZ6u97O7Uc1/eOzlqxbHtBz8qg4DuFW/v4FS+T/hFsywjj7epS0qk2OjzYV44i41YhTSRJix04QC+fRUPZ8h9FuAj+ScFYkBvSQmN0x7Mcw60qyyBJCRImDg8he67kP8YqYmDbzC/u1Hc9lL/5ArplfKuiQD0/EqxiLj'
-        sshPublicKey: SSH_CONNECTION
+        sshPublicKey: '$(id_rsa.pub)'
         sshPassphrase: 'teolia'
         sshKeySecureFile: 'id_rsa'
 
