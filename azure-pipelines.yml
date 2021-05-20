@@ -68,11 +68,17 @@ stages:
         contents: 'trainSchedule.zip'
         targetFolder: '/tmp'
         readyTimeout: '20000'
+    - task: SSH@0
+      inputs:
+        sshEndpoint: 'staging-server'
+        runOptions: 'inline'
+        inline: 'sudo /usr/bin/systemctl stop train-schedule && rm -rf /opt/train-schedule/* && unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo /usr/bin/systemctl start train-schedule'
+        readyTimeout: '20000'
 
 - stage: Production
   jobs:
   - job: waitForValidation
-    displayName: Wait for external validation
+    displayName: Wait for external validation - Staging OK?
     pool: server
     timeoutInMinutes: 4320
     steps:
