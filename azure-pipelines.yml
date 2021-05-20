@@ -4,7 +4,8 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/java
 
 variables:
-  SSH_CONNECTION: $(id_rsa.pub)
+- group: 'ssh-connections'
+ 
 
 trigger:
 - master
@@ -43,26 +44,41 @@ stages:
   jobs:
   - job: Testing
     steps:
-    - task: CmdLine@2
+    - task: Bash@3
       inputs:
-        script: 'echo $(id_rsa.pub)'
-
-
+          targetType: 'inline'
+          script: |
+            echo "Using the environment connection $env:SSH_CONNECTION"
+      env:
+        SSH_CONNECTION: $(id_rsa.pub)
+        
 - stage: Staging
   jobs:
-  - job: InstallingSSHKey
+  - job: CopyFilesOverSSHtoStaging
     steps:
-    - task: InstallSSHKey@0
+    - task: DownloadPipelineArtifact@2
       inputs:
-        knownHostsEntry: 'davidespinel1c.mylabserver.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDNAO1aU0nNTp3NReO8p7HhYGRhx1ME+cbjL0xXem4jXibdy4QEWE+PbB667rYzAFcMYpENQ0aTMNChr+LxhyPTpGZRQi8Bo1ACXji7x/tFwiMz7qXMOGFATD1W/uh6S/EZSd7mazTi3nGnJ1FQ11sbfTFdjZd/ka0b+AND73KSpq/NkSddvZ6u97O7Uc1/eOzlqxbHtBz8qg4DuFW/v4FS+T/hFsywjj7epS0qk2OjzYV44i41YhTSRJix04QC+fRUPZ8h9FuAj+ScFYkBvSQmN0x7Mcw60qyyBJCRImDg8he67kP8YqYmDbzC/u1Hc9lL/5ArplfKuiQD0/EqxiLj'
-        sshPublicKey: SSH_CONNECTION
-        sshPassphrase: 'teolia'
-        sshKeySecureFile: 'id_rsa'
+        buildType: 'current'
+        artifactName: 'trainSchedule.zip'
+        targetPath: '$(Pipeline.Workspace)/dist/'
+    - task: CopyFilesOverSSH@0
+      inputs:
+        sshEndpoint: 'staging-server'
+        sourceFolder: '$(Pipeline.Workspace)/dist/'
+        contents: 'trainSchedule.zip'
+        targetFolder: '/tmp'
+        readyTimeout: '20000'
+    - task: SSH@0
+      inputs:
+        sshEndpoint: 'staging-server'
+        runOptions: 'inline'
+        inline: 'sudo /usr/bin/systemctl stop train-schedule && rm -rf /opt/train-schedule/* && unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo /usr/bin/systemctl start train-schedule'
+        readyTimeout: '20000'
 
 - stage: Production
   jobs:
   - job: waitForValidation
-    displayName: Wait for external validation
+    displayName: Wait for external validation - Staging OK?
     pool: server
     timeoutInMinutes: 4320
     steps:
@@ -72,3 +88,25 @@ stages:
         notifyUsers: 
         instructions: 'Please validate the build configuration and resume'
         onTimeout: 'resume'
+  
+  - job: CopyFilesOverSSHtoProduction
+    dependsOn: waitForValidation
+    steps:
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'trainSchedule.zip'
+        targetPath: '$(Pipeline.Workspace)/dist/'
+    - task: CopyFilesOverSSH@0
+      inputs:
+        sshEndpoint: 'production-server'
+        sourceFolder: '$(Pipeline.Workspace)/dist/'
+        contents: 'trainSchedule.zip'
+        targetFolder: '/tmp'
+        readyTimeout: '20000'
+    - task: SSH@0
+      inputs:
+        sshEndpoint: 'production-server'
+        runOptions: 'inline'
+        inline: 'sudo /usr/bin/systemctl stop train-schedule && rm -rf /opt/train-schedule/* && unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo /usr/bin/systemctl start train-schedule'
+        readyTimeout: '20000'
