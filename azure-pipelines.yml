@@ -59,7 +59,7 @@ stages:
     - task: CopyFilesOverSSH@0
       inputs:
         sshEndpoint: 'staging-server'
-        sourceFolder: 'dist/'
+        sourceFolder: '$(Build.SourcesDirectory)/dist/'
         contents: 'trainSchedule.zip'
         targetFolder: '/tmp'
         readyTimeout: '20000'
