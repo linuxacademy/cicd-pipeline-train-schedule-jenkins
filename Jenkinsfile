@@ -10,7 +10,7 @@ pipeline {
     }
     stage('Build Docker Image') {
       when {
-        branch 'DEV*'
+        branch '*/DEV*'
       }
       steps {
         script {
@@ -23,7 +23,7 @@ pipeline {
     }
     stage('Push Docker Image') {
       when {
-        branch 'DEV*'
+        branch '*/DEV*'
       }
       steps {
         script {
@@ -36,7 +36,7 @@ pipeline {
     }
     stage('DeployToStaging') {
       when {
-        branch 'DEV*'
+        branch '*/DEV*'
       }
       steps {
         withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
@@ -55,7 +55,7 @@ pipeline {
     }
     stage('DeployToProduction') {
       when {
-        branch 'DEV*'
+        branch '*/DEV*'
       }
       steps {
         input 'Does the staging environment look OK?'
