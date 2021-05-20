@@ -62,6 +62,13 @@ stages:
         sshPublicKey: '$(id_rsa.pub)'
         sshPassphrase: 'teolia'
         sshKeySecureFile: 'id_rsa'
+    - task: CopyFilesOverSSH@0
+      inputs:
+        sshEndpoint:  
+        sourceFolder: 'dist/'
+        contents: 'trainSchedule.zip'
+        targetFolder: '/tmp'
+        readyTimeout: '20000'
 
 - stage: Production
   jobs:
