@@ -49,7 +49,7 @@ pipeline {
             } catch (err) {
               echo: 'caught error: $err'
             }
-            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@${env.stage_ip} \"docker run --restart-always --name train-schedule -p 3000:3000 -d dafespinelsa/train-schedule:${env:BUILD_NUMBER}\""
+            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@${env.stage_ip} \"docker run --restart always --name train-schedule -p 3000:3000 -d dafespinelsa/train-schedule:${env:BUILD_NUMBER}\""
           }
         }
       }
@@ -70,7 +70,7 @@ pipeline {
             } catch (err) {
               echo: 'caught error: $err'
             }
-            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@prod_ip \"docker run --restart-always --name train-schedule -p 3000:3000 -d dafespinelsa/train-schedule:${env:BUILD_NUMBER}\""
+            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@prod_ip \"docker run --restart always --name train-schedule -p 3000:3000 -d dafespinelsa/train-schedule:${env:BUILD_NUMBER}\""
           }
         }
       }
