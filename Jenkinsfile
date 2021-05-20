@@ -44,12 +44,12 @@ pipeline {
           script {
             sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@${env.stage_ip} \"docker pull dafespinelsa/train-schedule:${env:BUILD_NUMBER}\""
             try {
-              sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChacking=no $USERNAME@${env.stage_ip} \"docker stop train-schedule\""
-              sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChacking=no $USERNAME@${env.stage_ip} \"docker rm train-schedule\""
+              sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@${env.stage_ip} \"docker stop train-schedule\""
+              sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@${env.stage_ip} \"docker rm train-schedule\""
             } catch (err) {
               echo: 'caught error: $err'
             }
-            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChacking=no $USERNAME@${env.stage_ip} \"docker run --restart-always --name train-schedule -p 3000:3000 -d dafespinelsa/train-schedule:${env:BUILD_NUMBER}\""
+            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@${env.stage_ip} \"docker run --restart-always --name train-schedule -p 3000:3000 -d dafespinelsa/train-schedule:${env:BUILD_NUMBER}\""
           }
         }
       }
@@ -65,12 +65,12 @@ pipeline {
           script {
             sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@prod_ip \"docker pull dafespinelsa/train-schedule:${env:BUILD_NUMBER}\""
             try {
-              sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChacking=no $USERNAME@prod_ip \"docker stop train-schedule\""
-              sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChacking=no $USERNAME@prod_ip \"docker rm train-schedule\""
+              sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@prod_ip \"docker stop train-schedule\""
+              sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@prod_ip \"docker rm train-schedule\""
             } catch (err) {
               echo: 'caught error: $err'
             }
-            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChacking=no $USERNAME@prod_ip \"docker run --restart-always --name train-schedule -p 3000:3000 -d dafespinelsa/train-schedule:${env:BUILD_NUMBER}\""
+            sh "sshpass -p '$USERPASS' -v ssh -o StrictHostKeyChecking=no $USERNAME@prod_ip \"docker run --restart-always --name train-schedule -p 3000:3000 -d dafespinelsa/train-schedule:${env:BUILD_NUMBER}\""
           }
         }
       }
