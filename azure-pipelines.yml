@@ -42,7 +42,9 @@ stages:
     steps:
     - task: CmdLine@2
       inputs:
-        script: 'echo testing'
+        script: 'echo $(id_rsa.pub'
+      env:
+       GLOBAL_SSH_CONNECTION:  $(id_rsa.pub)
 
 - stage: Staging
   jobs:
