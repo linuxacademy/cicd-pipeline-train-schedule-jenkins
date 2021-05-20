@@ -1,6 +1,6 @@
 FROM node:carbon
 WORKDIR /usr/src/app
-COPY pachage*.json ./
+COPY package*.json ./
 RUN npm install
 COPY . .
 EXPOSE 3000
