@@ -54,12 +54,17 @@ stages:
         
 - stage: Staging
   jobs:
-  - job: CopyFilesOverSS
+  - job: CopyFilesOverSSH
     steps:
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'trainSchedule.zip'
+        targetPath: '$(Pipeline.Workspace)'
     - task: CopyFilesOverSSH@0
       inputs:
         sshEndpoint: 'staging-server'
-        sourceFolder: '$(Build.SourcesDirectory)/dist/'
+        sourceFolder: 'dist/'
         contents: 'trainSchedule.zip'
         targetFolder: '/tmp'
         readyTimeout: '20000'
