@@ -54,7 +54,7 @@ stages:
         
 - stage: Staging
   jobs:
-  - job: InstallingSSHKey
+  - job: CopyFilesOverSS
     steps:
     - task: CopyFilesOverSSH@0
       inputs:
