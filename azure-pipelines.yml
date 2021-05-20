@@ -46,7 +46,8 @@ stages:
     steps:
     - task: CmdLine@2
       inputs:
-        script: 'echo $env:SSH_CONNECTION'
+        script: |
+          echo $env:SSH_CONNECTION
       env:
         SSH_CONNECTION: $(id_rsa.pub)
 
