@@ -90,6 +90,7 @@ stages:
         onTimeout: 'resume'
   
   - job: CopyFilesOverSSHtoProduction
+    dependsOn: waitForValidation
     steps:
     - task: DownloadPipelineArtifact@2
       inputs:
