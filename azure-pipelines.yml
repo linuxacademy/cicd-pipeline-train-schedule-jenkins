@@ -54,7 +54,7 @@ stages:
         
 - stage: Staging
   jobs:
-  - job: CopyFilesOverSSH
+  - job: CopyFilesOverSSHtoStaging
     steps:
     - task: DownloadPipelineArtifact@2
       inputs:
@@ -88,3 +88,24 @@ stages:
         notifyUsers: 
         instructions: 'Please validate the build configuration and resume'
         onTimeout: 'resume'
+  
+  - job: CopyFilesOverSSHtoProduction
+    steps:
+    - task: DownloadPipelineArtifact@2
+      inputs:
+        buildType: 'current'
+        artifactName: 'trainSchedule.zip'
+        targetPath: '$(Pipeline.Workspace)/dist/'
+    - task: CopyFilesOverSSH@0
+      inputs:
+        sshEndpoint: 'production-server'
+        sourceFolder: '$(Pipeline.Workspace)/dist/'
+        contents: 'trainSchedule.zip'
+        targetFolder: '/tmp'
+        readyTimeout: '20000'
+    - task: SSH@0
+      inputs:
+        sshEndpoint: 'production-server'
+        runOptions: 'inline'
+        inline: 'sudo /usr/bin/systemctl stop train-schedule && rm -rf /opt/train-schedule/* && unzip /tmp/trainSchedule.zip -d /opt/train-schedule && sudo /usr/bin/systemctl start train-schedule'
+        readyTimeout: '20000'
