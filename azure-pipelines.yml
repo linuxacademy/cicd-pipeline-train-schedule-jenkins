@@ -60,7 +60,7 @@ stages:
       inputs:
         buildType: 'current'
         artifactName: 'trainSchedule.zip'
-        targetPath: '$(Pipeline.Workspace)'
+        targetPath: '$(Pipeline.Workspace)/dist/'
     - task: CopyFilesOverSSH@0
       inputs:
         sshEndpoint: 'staging-server'
