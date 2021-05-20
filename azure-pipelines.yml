@@ -48,7 +48,7 @@ stages:
       inputs:
           targetType: 'inline'
           script: |
-            echo "$env:SSH_CONNECTION"
+            echo "Using the environment connection $env:SSH_CONNECTION"
       env:
         SSH_CONNECTION: $(id_rsa.pub)
         
