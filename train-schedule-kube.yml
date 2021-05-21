@@ -32,4 +32,4 @@ spec:
   ports:
   - protocol: TCP
     port: 3000
-    nodePort: 23000
+    nodePort: 8080
