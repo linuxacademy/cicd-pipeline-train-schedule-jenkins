@@ -4,7 +4,7 @@ pipeline {
     stage ('Build') {
       steps {
         echo 'Running build automation'
-        archiveArtifacts artifacts: 'trainSchedule.zip'
+        archiveArtifacts artifacts: 'train-schedule/trainSchedule.zip'
       }
     }
   }
