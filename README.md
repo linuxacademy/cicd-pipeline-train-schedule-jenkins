@@ -10,6 +10,7 @@ You need a Java JDK 7 or later to run the build. You can run the build like this
 
 efwefwefwefwefwefwef
 hello world 
+dfklasdfnklasdnfod
 You can run the app with:
 
     ./gradlew npm_start
