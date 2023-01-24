@@ -10,7 +10,6 @@ node {
 }
 
 //declare a build task
-task init
 task build
 
 //declare a task to create a zip of the app
