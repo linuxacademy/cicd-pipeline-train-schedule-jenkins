@@ -6,7 +6,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-            sh export BUILD_NUMBER=${env.BUILD_NUMBER}
+            sh export BUILD_NUMBER="${env.BUILD_NUMBER}"
             sh './gradlew build'
             }
         }
