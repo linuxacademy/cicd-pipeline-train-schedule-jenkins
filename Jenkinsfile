@@ -9,4 +9,5 @@ pipeline {
             sh './gradlew build'
             }
         }
+    }
 }
