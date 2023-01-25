@@ -13,7 +13,7 @@ pipeline {
     }
     post {
         always {
-            archieveArtifacts: artifacts: 'trainSchedule.zip', onlyIfSuccessful: true
+            archiveArtifacts artifacts: 'dist/trainSchedule.zip', followSymlinks: false, onlyIfSuccessful: true
         }
     }
 }
