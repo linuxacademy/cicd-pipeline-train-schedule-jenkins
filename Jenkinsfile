@@ -11,4 +11,9 @@ pipeline {
             }
         }
     }
+    post {
+        always {
+            archieveArtifacts: artifacts: 'trainSchedule.zip', onlyIfSuccessful: true
+        }
+    }
 }
