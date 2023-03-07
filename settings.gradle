@@ -10,3 +10,5 @@
 rootProject.name = 'cicd-pipeline-train-schedule-jenkins'
 
 set=true
+
+soso=true
