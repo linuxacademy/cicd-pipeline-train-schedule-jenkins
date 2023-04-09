@@ -4,7 +4,6 @@ plugins {
 }
 
 node {
-
 	download = true
 	version = "9.11.1"
 	npmVersion = "5.6.0"
@@ -24,7 +23,7 @@ task zip(type: Zip) {
 		include "routes/**"
 		include "views/**"
 	}
-	destinationDirectory(file("dist"))
+	destinationDirector = file("dist")
 	baseName "trainSchedule"
 }
 
