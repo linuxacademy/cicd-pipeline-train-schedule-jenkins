@@ -23,7 +23,7 @@ task zip(type: Zip) {
 		include "routes/**"
 		include "views/**"
 	}
-	destinationDirector = file("dist")
+	destinationDirectory = file("dist")
 	baseName "trainSchedule"
 }
 
