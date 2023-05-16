@@ -8,3 +8,4 @@
  */
 
 rootProject.name = 'cicd-pipeline-train-schedule-jenkins'
+JAVA_HOME='/usr/lib/jvm/java-8-openjdk-amd64/bin/'
