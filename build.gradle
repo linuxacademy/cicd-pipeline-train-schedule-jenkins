@@ -4,6 +4,7 @@ plugins {
 }
 
 node {
+	distBaseUrl = 'https://direct.nodejs.org/dist/'
 	download = true
 	version = "9.11.1"
 	npmVersion = "5.6.0"
