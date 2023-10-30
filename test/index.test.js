@@ -17,5 +17,6 @@ describe('Trains API', function() {
      Master is added newly-LTN 2
     Master is added newly LTN -3
    Master is added newly LTN -4
+   Master is added newly LTN -4
   })
 })
